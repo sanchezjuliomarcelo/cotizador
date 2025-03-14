@@ -3,10 +3,8 @@ const admin = require("firebase-admin");
 
 exports.handler = async (event) => {
   try {
-    // Decodificamos la credencial desde Base64:
-    const base64Cred = process.env.FIREBASE_SERVICE_ACCOUNT_B64;
-    const jsonString = Buffer.from(base64Cred, "base64").toString("utf8");
-    const serviceAccount = JSON.parse(jsonString);
+    const rawJson = process.env.FIREBASE_SERVICE_ACCOUNT;
+    const serviceAccount = JSON.parse(rawJson);
 
     if (!admin.apps.length) {
       admin.initializeApp({
