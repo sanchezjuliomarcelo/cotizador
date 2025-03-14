@@ -1,27 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/.netlify/functions/scrapeBna")
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log("Respuesta scraping:", data);
-      
-      // MOSTRAR EN PANTALLA
-      if (data.status === "ok") {
-        const fechaEl = document.getElementById("fecha");
-        const compraEl = document.getElementById("dolarCompra");
-        const ventaEl = document.getElementById("dolarVenta");
-        const errorMsgEl = document.getElementById("errorMsg");
+  const btnGuardar = document.getElementById("btnGuardar");
+  if (!btnGuardar) return;
 
-        fechaEl.textContent = `Fecha: ${data.fecha || "N/A"}`;
-        compraEl.textContent = `Compra: ${data.compra || "N/A"}`;
-        ventaEl.textContent = `Venta: ${data.venta || "N/A"}`;
-        errorMsgEl.textContent = ""; // Limpia cualquier error previo
-      } else {
-        // Si el status no es "ok", mostramos error
-        document.getElementById("errorMsg").textContent = "No se pudo obtener la cotización del dólar.";
-      }
+  btnGuardar.addEventListener("click", () => {
+    const data = {
+      fecha: "2025-03-15",
+      compra: "1000,00",
+      venta: "1100,00"
+    };
+
+    fetch("/.netlify/functions/saveFirestore", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     })
-    .catch((err) => {
-      console.error("Error:", err);
-      document.getElementById("errorMsg").textContent = `Error: ${err.message}`;
-    });
+      .then(resp => resp.json())
+      .then(respData => {
+        console.log("Respuesta Firestore:", respData);
+        if (respData.status === "ok") {
+          alert("Guardado con éxito, docId: " + respData.docId);
+        } else {
+          alert("Error al guardar");
+        }
+      })
+      .catch(err => {
+        console.error("Error fetch:", err);
+        alert("Error al guardar");
+      });
+  });
 });

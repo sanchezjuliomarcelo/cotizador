@@ -2,7 +2,8 @@
   "dependencies": {
     "axios": "^1.8.3",
     "cheerio": "^1.0.0",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "firebase-admin": "^13.2.0"
   },
   "name": "cotizador",
   "version": "1.0.0",
