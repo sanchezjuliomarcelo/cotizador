@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Cotizador</title>
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <!-- Tu archivo de script -->
-  <script src="script.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
 
-  <!-- Archivo de estilos propio -->
+  <!-- Tu archivo de estilos propio -->
   <link rel="stylesheet" href="styles.css" />
-</head>
 
+  <!-- Coloca el script preferiblemente al final (o con defer) para que los elementos del DOM existan -->
+  <script src="script.js" defer></script>
+</head>
 <body>
   <div class="container py-5">
     <div class="row justify-content-center">
@@ -24,27 +26,34 @@
             Dólar (Banco Nación)
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center mb-3">
-              <span id="fecha" class="d-block text-muted"></span>
-            </h5>
+            <!-- Aquí mostraremos la fecha que provee el BNA -->
             <p id="dolarFecha" class="text-center fs-5 fw-semibold mb-1"></p>
+            <!-- Compra y Venta -->
+            <p id="dolarCompra" class="text-center fs-5 fw-semibold mb-1"></p>
             <p id="dolarVenta" class="text-center fs-5 fw-semibold mb-1"></p>
+
+            <!-- Mensajes de error -->
             <div id="errorMsg" class="text-danger text-center"></div>
           </div>
           <div class="card-footer text-muted text-center">
             Fuente: www.bna.com.ar
           </div>
         </div>
-        <button id="btnGuardar">Guardar en base de datos</button>
+
+        <!-- Botón para guardar en la base de datos (Firestore) -->
+        <div class="text-center mt-3">
+          <button id="btnGuardar" class="btn btn-primary">
+            Guardar en base de datos
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-
-  <!-- Bootstrap JS (opcional) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
+  <!-- Bootstrap JS (si requieres componentes interactivos) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    defer
+  ></script>
 </body>
-
 </html>
